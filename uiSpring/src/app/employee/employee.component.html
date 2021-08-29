@@ -1,0 +1,141 @@
+<p>employee works!</p>
+
+<a>
+    <h1>EMPLOYEE DETAILS</h1>
+</a>
+
+<hr><br>
+
+<table class="table">
+    <tr>
+        <td><button class="btn btn-primary" (click)="getEnable1()">GET REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable2()">POST REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable3()">PUT REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable4()">DELETE REQUEST</button></td>
+    </tr>
+</table>
+
+<hr><br>
+
+<div id="id1" *ngIf="f1">
+    <button class="btn btn-primary" (click)=getsClick()>Get employees</button><br><br>
+
+    <div *ngIf="flagGETs">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Employee Address</th>
+                <th>Asset Id</th>
+            </tr>
+
+            <tr *ngFor="let emp of employees">
+                <td>{{emp.empId}}</td>
+                <td>{{emp.empName}}</td>
+                <td>{{emp.empAddress}}</td>
+                <td>{{emp.asset.assetId}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br><br><br><br>
+
+    <label><b>Input Employee Id</b></label><br><br>
+
+    <input type="number" name="empId" #empId><br><br>
+    <button class="btn btn-primary" (click)="getEmp(empId.value)">Get employee</button><br><br>
+
+    <div *ngIf="flagGET && errorMessage==null">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Employee Address</th>
+                <th>Asset Id</th>
+            </tr>
+
+            <tr>
+                <td>{{employee.empId}}</td>
+                <td>{{employee.empName}}</td>
+                <td>{{employee.empAddress}}</td>
+                <td>{{employee.asset.assetId}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="error" *ngIf="errorMessage!=null">{{errorMessage}}</div>
+
+</div>
+
+<div id="id2" *ngIf="f2">
+    <form #empDetails="ngForm" (submit)="addEmp(empDetails.value)">
+        <table>
+            <tr>
+                <td>Employee Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="empId" placeholder="Please Enter Employee Id" [ngModel]="emp.empId"></td>
+            </tr><br>
+            <tr>
+                <td>Employee Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="empName" placeholder="Please Enter Employee Name" [ngModel]="emp.empName"></td>
+            </tr><br>
+            <tr>
+                <td>Employee Address &nbsp;&nbsp;</td>
+                <td><input type="text" name="empAddress" placeholder="Please Enter Employee Address" [ngModel]="emp.empAddress"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetId" placeholder="Please Enter Asset Id" [ngModel]="emp.asset.assetId"></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="ADD EMPLOYEE"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="postResponseMessage!=null">{{postResponseMessage}}</div>
+    <div class="error" *ngIf="postErrorMessage!=null">{{postErrorMessage}}</div>
+</div>
+
+<div id="id3" *ngIf="f3">
+    <form #empDetails="ngForm" (submit)="updateEmp(empDetails.value)">
+        <table>
+            <tr>
+                <td>Employee Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="empId" placeholder="Please Enter Employee Id" [ngModel]="emp.empId"></td>
+            </tr><br>
+            <tr>
+                <td>Employee Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="empName" placeholder="Please Enter Employee Name" [ngModel]="emp.empName"></td>
+            </tr><br>
+            <tr>
+                <td>Employee Address &nbsp;&nbsp;</td>
+                <td><input type="text" name="empAddress" placeholder="Please Enter Employee Address" [ngModel]="emp.empAddress"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetId" placeholder="Please Enter Asset Id" [ngModel]="emp.asset.assetId"></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="UPDATE EMPLOYEE"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="putResponseMessage!=null">{{putResponseMessage}}</div>
+    <div class="error" *ngIf="putErrorMessage!=null">{{putErrorMessage}}</div>
+</div>
+
+<div id="id4" *ngIf="f4">
+    
+    <label><b>Employee Id</b></label><br><br>
+    <input type="number" name="employeeId" #employeeId placeholder="Enter Employee Id to delete"><br><br>
+    <button class="btn btn-primary" (click)="deleteEmp(employeeId.value)">DELETE EMPLOYEE</button>
+
+    <div *ngIf="deleteResponseMessage!=null">{{deleteResponseMessage}}</div>
+    <div class="error" *ngIf="deleteErrorMessage!=null">{{deleteErrorMessage}}</div>
+</div>
+
+<br><br>
+

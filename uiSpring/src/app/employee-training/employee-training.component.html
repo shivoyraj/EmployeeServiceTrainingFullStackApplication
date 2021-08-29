@@ -1,0 +1,181 @@
+<p>employee-training works!</p>
+
+<h1>TRAINING DETAILS</h1>
+
+
+<hr><br>
+
+<table class="table">
+    <tr>
+        <td><button class="btn btn-primary" (click)="getEnable1()">GET REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable2()">POST REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable3()">PUT REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable4()">DELETE REQUEST</button></td>
+    </tr>
+</table>
+
+<hr><br>
+
+<div id="id1" *ngIf="f1">
+    <button class="btn btn-primary" (click)=getsClick()>Get Training Details</button><br><br>
+
+    <div *ngIf="flagGETs">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>EMPLOYEE Id</th>
+                <th>COURSE CODE</th>
+                <th>COURSE NAME</th>
+                <th>SCORE</th>
+                <th>HOURS SPEND</th>
+                <th>DATE OF COMPLITION</th>
+                <th>STATUS</th>
+            </tr>
+
+            <tr *ngFor="let t of trainings">
+                <td>{{t.empId}}</td>
+                <td>{{t.courseCode}}</td>
+                <td>{{t.courseName}}</td>
+                <td>{{t.score}}</td>
+                <td>{{t.hourSpend}}</td>
+                <td>{{t.dateOfComplition}}</td>
+                <td>{{t.status}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br><br><br><br>
+
+      <label><b>Input Asset Id</b></label><br><br>
+
+    <input type="number" name="empId" #empId><br><br>
+    <button class="btn btn-primary" (click)="getTraining(empId.value)">Get Training Detail</button><br><br>
+
+    <div *ngIf="flagGET && errorMessage==null">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>EMPLOYEE Id</th>
+                <th>COURSE CODE</th>
+                <th>COURSE NAME</th>
+                <th>SCORE</th>
+                <th>HOURS SPEND</th>
+                <th>DATE OF COMPLITION</th>
+                <th>STATUS</th>
+            </tr>
+
+            <tr>
+                <td>{{training.empId}}</td>
+                <td>{{training.courseCode}}</td>
+                <td>{{training.courseName}}</td>
+                <td>{{training.score}}</td>
+                <td>{{training.hourSpend}}</td>
+                <td>{{training.dateOfComplition}}</td>
+                <td>{{training.status}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="error" *ngIf="errorMessage!=null">{{errorMessage}}</div>
+
+</div>
+
+<div id="id2" *ngIf="f2">
+    <form #trainingDetails="ngForm" (submit)="addTraining(trainingDetails.value)">
+        <table>
+            <tr>
+                <td>Employee Id &nbsp;&nbsp;</td>
+                <td><input type="number" name="empId" placeholder="Please Enter Employee Id" [ngModel]="train.empId"></td>
+            </tr><br>
+            <tr>
+                <td>course Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="courseName" placeholder="Please Enter Course Name" [ngModel]="train.courseName"></td>
+            </tr><br>
+            <tr>
+                <td>course Code &nbsp;&nbsp;</td>
+                <td><input type="text" name="courseCode" placeholder="Please Enter Course Code" [ngModel]="train.courseCode"></td>
+            </tr><br>
+            <tr>
+                <td>Date of Complition &nbsp;&nbsp;</td>
+                <td><input type="date" name="dateOfComplition" placeholder="Please Enter Date of Complition" [ngModel]="train.dateOfComplition"></td>
+            </tr><br>
+            <tr>
+                <td>Hour Spend &nbsp;&nbsp;</td>
+                <td><input type="number" name="hourSpend" placeholder="Please Enter Spend Hours" [ngModel]="train.hourSpend"></td>
+            </tr><br>
+            <tr>
+                <td>Score &nbsp;&nbsp;</td>
+                <td><input type="number" name="score" placeholder="Please Enter score" [ngModel]="train.score"></td>
+            </tr><br>
+            <tr>
+                <td>course Code &nbsp;&nbsp;</td>
+                <td><select name="status" placeholder="Please select status" [ngModel]="train.status">
+                    <option value="Started">Started</option>
+                    <option value="completed">completed</option>
+                </select></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="ADD TRAINING"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="postResponseMessage!=null">{{postResponseMessage}}</div>
+    <div class="error" *ngIf="postErrorMessage!=null">{{postErrorMessage}}</div>
+</div>
+
+<div id="id3" *ngIf="f3">
+  <form #trainingDetails="ngForm" (submit)="updateTraining(trainingDetails.value)">
+        <table>
+            <tr>
+                <td>Employee Id &nbsp;&nbsp;</td>
+                <td><input type="number" name="empId" placeholder="Please Enter Employee Id" [ngModel]="train.empId"></td>
+            </tr><br>
+            <tr>
+                <td>course Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="courseName" placeholder="Please Enter Course Name" [ngModel]="train.courseName"></td>
+            </tr><br>
+            <tr>
+                <td>course Code &nbsp;&nbsp;</td>
+                <td><input type="text" name="courseCode" placeholder="Please Enter Course Code" [ngModel]="train.courseCode"></td>
+            </tr><br>
+            <tr>
+                <td>Date of Complition &nbsp;&nbsp;</td>
+                <td><input type="date" name="dateOfComplition" placeholder="Please Enter Date of Complition" [ngModel]="train.dateOfComplition"></td>
+            </tr><br>
+            <tr>
+                <td>Hour Spend &nbsp;&nbsp;</td>
+                <td><input type="number" name="hourSpend" placeholder="Please Enter Spend Hours" [ngModel]="train.hourSpend"></td>
+            </tr><br>
+            <tr>
+                <td>Score &nbsp;&nbsp;</td>
+                <td><input type="number" name="score" placeholder="Please Enter score" [ngModel]="train.score"></td>
+            </tr><br>
+            <tr>
+                <td>course Code &nbsp;&nbsp;</td>
+                <td><select name="status" placeholder="Please select status" [ngModel]="train.status">
+                    <option value="Started">Started</option>
+                    <option value="completed">completed</option>
+                </select></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="UPDATE TRAINING"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="putResponseMessage!=null">{{putResponseMessage}}</div>
+    <div class="error" *ngIf="putErrorMessage!=null">{{putErrorMessage}}</div>
+</div>
+
+<div id="id4" *ngIf="f4">
+    
+    <label><b>Employee Id</b></label><br><br>
+    <input type="number" name="empId" #empId placeholder="Enter Employee Id to delete Training records"><br><br>
+    <button class="btn btn-primary" (click)="deleteTraining(empId.value)">DELETE TRAINING</button>
+
+    <div *ngIf="deleteResponseMessage!=null">{{deleteResponseMessage}}</div>
+    <div class="error" *ngIf="deleteErrorMessage!=null">{{deleteErrorMessage}}</div>
+</div>
+
+<br><br>

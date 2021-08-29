@@ -1,0 +1,131 @@
+<p>asset works!</p>
+<h1>ASSET DETAILS</h1>
+
+
+<hr><br>
+
+<table class="table">
+    <tr>
+        <td><button class="btn btn-primary" (click)="getEnable1()">GET REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable2()">POST REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable3()">PUT REQUEST</button></td>
+        <td><button class="btn btn-primary" (click)="getEnable4()">DELETE REQUEST</button></td>
+    </tr>
+</table>
+
+<hr><br>
+
+<div id="id1" *ngIf="f1">
+    <button class="btn btn-primary" (click)=getsClick()>Get assets</button><br><br>
+
+    <div *ngIf="flagGETs">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>ASSET Id</th>
+                <th>ASSET Name</th>
+                <th>ASSET Type</th>
+            </tr>
+
+            <tr *ngFor="let a of assets">
+                <td>{{a.assetId}}</td>
+                <td>{{a.assetName}}</td>
+                <td>{{a.assetType}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br><br><br><br>
+
+     <label><b>Input Asset Id</b></label><br><br>
+
+    <input type="text" name="assetId" #assetId><br><br>
+    <button class="btn btn-primary" (click)="getAsset(assetId.value)">Get asset</button><br><br>
+
+    <div *ngIf="flagGET && errorMessage==null">
+        <table class="table" border="1px solid black">
+            <tr>
+                <th>ASSET Id</th>
+                <th>ASSET Name</th>
+                <th>ASSET Type</th>
+            </tr>
+
+            <tr>
+                <td>{{asset.assetId}}</td>
+                <td>{{asset.assetName}}</td>
+                <td>{{asset.assetType}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="error" *ngIf="errorMessage!=null">{{errorMessage}}</div>
+
+</div>
+
+<div id="id2" *ngIf="f2">
+    <form #assetDetails="ngForm" (submit)="addAsset(assetDetails.value)">
+        <table>
+            <tr>
+                <td>Asset Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetId" placeholder="Please Enter Asset Id" [ngModel]="asset.assetId"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetName" placeholder="Please Enter Asset Name" [ngModel]="asset.assetName"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Type &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetType" placeholder="Please Enter Asset Type" [ngModel]="asset.assetType"></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="ADD ASSET"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="postResponseMessage!=null">{{postResponseMessage}}</div>
+    <div class="error" *ngIf="postErrorMessage!=null">{{postErrorMessage}}</div>
+</div>
+
+<div id="id3" *ngIf="f3">
+    <form #assetDetails="ngForm" (submit)="updateAsset(assetDetails.value)">
+        <table>
+            <tr>
+                <td>Asset Id &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetId" placeholder="Please Enter Asset Id" [ngModel]="asset.assetId"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Name &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetName" placeholder="Please Enter Asset Name" [ngModel]="asset.assetName"></td>
+            </tr><br>
+            <tr>
+                <td>Asset Type &nbsp;&nbsp;</td>
+                <td><input type="text" name="assetType" placeholder="Please Enter Asset Type" [ngModel]="asset.assetType"></td>
+            </tr><br>
+            <tr>
+                <td></td>
+                <td><input type="submit" value ="UPDATE ASSET"></td>
+            </tr><br>
+        </table>
+    </form>
+
+    <div *ngIf="putResponseMessage!=null">{{putResponseMessage}}</div>
+    <div class="error" *ngIf="putErrorMessage!=null">{{putErrorMessage}}</div>
+</div>
+
+<div id="id4" *ngIf="f4">
+    
+    <label><b>Employee Id</b></label><br><br>
+    <input type="text" name="assetId" #assetId placeholder="Enter Asset Id to delete"><br><br>
+    <button class="btn btn-primary" (click)="deleteAsset(assetId.value)">DELETE ASSET</button>
+
+    <div *ngIf="deleteResponseMessage!=null">{{deleteResponseMessage}}</div>
+    <div class="error" *ngIf="deleteErrorMessage!=null">{{deleteErrorMessage}}</div>
+</div>
+
+<br><br>
+
+
+
+
+

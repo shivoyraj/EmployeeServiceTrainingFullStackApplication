@@ -1,0 +1,29 @@
+button{
+
+    background-color: blue;
+
+}
+
+#id1,#id2,#id3,#id4{
+    
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+table
+{
+    text-align: center;
+    color: rgb(110, 109, 41);
+}
+
+
+
+H5,H1{
+    text-align: center;
+    background-color:rgb(201, 0, 0);
+    color: aliceblue;
+}
+
+label{
+    color: rgb(126, 19, 19);
+}
