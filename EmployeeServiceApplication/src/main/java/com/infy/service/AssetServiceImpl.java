@@ -84,7 +84,7 @@ public class AssetServiceImpl implements AssetService {
 	public List<AssetDTO> getAssets() throws AssetServiceException {
 		List<Asset> assetList = (List<Asset>) assetRepo.findAll();
 		if (assetList.isEmpty())
-			throw new AssetServiceException("asset.ASSET_LIST_EMPTY");
+			throw new AssetServiceException("asset.ASSETS_LIST_EMPTY");
 		List<AssetDTO> assetDTO= new ArrayList<AssetDTO>();
 		
 		for(Asset asset:assetList) {

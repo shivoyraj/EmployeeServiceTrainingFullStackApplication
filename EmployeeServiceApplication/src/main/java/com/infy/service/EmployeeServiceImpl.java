@@ -36,6 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private AssetRepository assetRepo;
+	
+	@Autowired
+	private TrainingService trainingService;
 
 	@Override
 	public List<EmployeeDTO> getEmployees() throws EmployeeServiceException {
@@ -163,6 +166,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		empRepo.deleteById(empId);
 		
 		LOGGER.info("employee.EMPLOYEE_DELETED_SUCCESSFULL");
+		
+	
+
+		
+		
 	}
 
 }

@@ -23,6 +23,8 @@ export class EmployeeComponent implements OnInit {
   flagGETs: boolean = false;
 
   errorMessage: string | null = null;
+  getsErrorMessage: string | null = null;
+
 
   postResponseMessage: any | null = null;
   postErrorMessage: string | null = null;
@@ -63,15 +65,24 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
 
+  getEmps() {
     this.empService.getEmployees()
       .subscribe(
-        data => this.employees = data,
-        error => this.errorMessage = <any>error
+        (data) => {this.employees = data;
+          this.flagGETs = true;
+          this.getsErrorMessage = null
+        },
+        (error) => {
+          this.getsErrorMessage = <any>error.error.errorMessage;
+          this.flagGETs = false;
+        }
       );
 
 
   }
+
 
   getEmp(empId: string): void {
 
@@ -154,9 +165,7 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  getsClick() {
-    this.flagGETs = (!this.flagGETs)
-  }
+ 
 
 
 

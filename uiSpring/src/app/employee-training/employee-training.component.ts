@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { fakeAsync } from '@angular/core/testing';
 import { EmployeeTrainingService } from './employee-training.service';
 import { Training } from './employeeTraining';
 
@@ -20,6 +22,7 @@ export class EmployeeTrainingComponent implements OnInit {
   flagGETs: boolean = false;
 
   errorMessage: string | null = null;
+  getsErrorMessage: string | null = null;
 
   postResponseMessage: any | null = null;
   postErrorMessage: string | null = null;
@@ -30,7 +33,7 @@ export class EmployeeTrainingComponent implements OnInit {
   deleteResponseMessage: any | null = null;
   deleteErrorMessage: string | null = null;
 
-  date:Date= new Date()
+  date: Date = new Date()
 
   public trainings = [
     {
@@ -53,7 +56,7 @@ export class EmployeeTrainingComponent implements OnInit {
     "status": ""
   };
 
-  train: Training = new Training(0,"", "",0,0,this.date,"");
+  train: Training = new Training(0, "", "", 0, 0, this.date, "");
 
   constructor(private trainingService: EmployeeTrainingService) {
 
@@ -61,18 +64,28 @@ export class EmployeeTrainingComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+  }
+
+  getTrainings() {
+
     this.trainingService.getTrainings()
       .subscribe(
-        data => this.trainings = data,
-        error => this.errorMessage = <any>error
+        (data) => {
+          this.trainings = data;
+          this.flagGETs = true;
+          this.getsErrorMessage = null
+        },
+        (error) => {
+          this.getsErrorMessage = <any>error.error.errorMessage;
+          this.flagGETs = false;
+        }
       );
-
-
   }
 
   getTraining(empId: string): void {
 
-    this.empId =Number(empId);
+    this.empId = Number(empId);
     this.flagGET = (!this.flagGET);
     this.trainingService.getTraining(this.empId)
       .subscribe(
@@ -85,14 +98,14 @@ export class EmployeeTrainingComponent implements OnInit {
   }
 
   addTraining(trainObj: any) {
-   
-    this.train.empId=trainObj.empId;
-    this.train.courseCode=trainObj.courseCode;
-    this.train.courseName=trainObj.courseName;
-    this.train.dateOfComplition=trainObj.dateOfComplition;
-    this.train.hourSpend=trainObj.hourSpend;
-    this.train.score=trainObj.score;
-    this.train.status=trainObj.status;
+
+    this.train.empId = trainObj.empId;
+    this.train.courseCode = trainObj.courseCode;
+    this.train.courseName = trainObj.courseName;
+    this.train.dateOfComplition = trainObj.dateOfComplition;
+    this.train.hourSpend = trainObj.hourSpend;
+    this.train.score = trainObj.score;
+    this.train.status = trainObj.status;
 
 
     this.trainingService.addTraining(this.train)
@@ -114,15 +127,15 @@ export class EmployeeTrainingComponent implements OnInit {
 
   updateTraining(trainObj: any) {
 
-    this.train.empId=trainObj.empId;
-    this.train.courseCode=trainObj.courseCode;
-    this.train.courseName=trainObj.courseName;
-    this.train.dateOfComplition=trainObj.dateOfComplition;
-    this.train.hourSpend=trainObj.hourSpend;
-    this.train.score=trainObj.score;
-    this.train.status=trainObj.status;
+    this.train.empId = trainObj.empId;
+    this.train.courseCode = trainObj.courseCode;
+    this.train.courseName = trainObj.courseName;
+    this.train.dateOfComplition = trainObj.dateOfComplition;
+    this.train.hourSpend = trainObj.hourSpend;
+    this.train.score = trainObj.score;
+    this.train.status = trainObj.status;
 
-  
+
 
     this.trainingService.updateTraining(this.train)
       .subscribe(
@@ -163,9 +176,7 @@ export class EmployeeTrainingComponent implements OnInit {
 
   }
 
-  getsClick() {
-    this.flagGETs = (!this.flagGETs)
-  }
+ 
 
 
 

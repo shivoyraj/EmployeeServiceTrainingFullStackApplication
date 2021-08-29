@@ -21,6 +21,8 @@ export class AssetComponent implements OnInit {
   flagGETs: boolean = false;
 
   errorMessage: string | null = null;
+  getsErrorMessage: string | null = null;
+
 
   postResponseMessage: any | null = null;
   postErrorMessage: string | null = null;
@@ -51,15 +53,24 @@ export class AssetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
 
+  getAssets() {
+  
     this.assetService.getAssets()
       .subscribe(
-        data => this.assets = data,
-        error => this.errorMessage = <any>error
+        (data) =>{ this.assets = data
+          this.flagGETs = true;
+          this.getsErrorMessage = null
+        },
+        (error) => {
+          this.getsErrorMessage = <any>error.error.errorMessage;
+          this.flagGETs = false;
+        }
       );
 
-
   }
+
 
   getAsset(assetId: string): void {
 
@@ -140,10 +151,7 @@ export class AssetComponent implements OnInit {
 
   }
 
-  getsClick() {
-    this.flagGETs = (!this.flagGETs)
-  }
-
+ 
 
 
   getEnable1() {
