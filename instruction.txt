@@ -1,0 +1,19 @@
+INSTRUCTION TO RUN APPLICATIONS 
+
+ 
+
+1) Run EmployeeService and EmployeeTraining Application 
+
+2) Import node module in uiSpring application 
+
+3) Run uiSpring Application 
+
+ 
+
+SEQUENCE  
+
+1) Add some assets 
+
+2) Add employee using any unused assets Id 
+
+3) Add Training using any employee Id 
